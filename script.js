@@ -1,4 +1,9 @@
 
+    if (window.location.hostname !== 'agungdevlop.github.io') {
+        // Redirect ke URL yang diinginkan
+        window.location.href = 'https://agungdevlop.github.io/chat.github.io/';
+    }
+    
         new Vue({
             el: '#app',
             data() {
@@ -86,8 +91,4 @@
             }
         });
         
-        if (window.location.hostname !== 'agungdevlop.github.io') {
-        // Redirect ke URL yang diinginkan
-        window.location.href = 'https://agungdevlop.github.io/chat.github.io/';
-    }
     
