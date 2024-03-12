@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notification Viewer</title>
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -90,11 +90,7 @@
             <div v-if="notifications.length === 0" class="text-center text-white">No notifications found.</div>
             <div v-for="(notification, index) in notifications" :key="index" class="notification-box p-3 rounded mb-3">
                 <h2 class="text-xl font-semibold mb-4">{{ notification.nohp }}</h2>
-                <div class="mb-4">
-                    <p><strong>Total Group:</strong> {{ getTotalGroup(notification.notifications) }} Group</p>
-                    <p><strong>Total Sender:</strong> {{ getTotalSender(notification.notifications) }} Sender</p>
-                    <p><strong>Total Messages:</strong> {{ getTotalMessages(notification.notifications) }} Message</p>
-                </div>
+                <div v-if="notification.notifications.length === 0" class="text-center text-white">No notifications found.</div>
                 <div v-for="(notif, i) in notification.notifications" :key="i" class="mb-4 bg-white p-3 rounded mb-3 text-green-500">
                     <p class="mb-2"><strong><i :class="getAppIconClass(notif.App)"></i>App:</strong> {{ notif.App }}</p>
                     <p v-if="notif.group && notif.sender" class="mb-2"><strong><i class="fas fa-users mr-2"></i>Group:</strong> {{ notif.group }}</p>
@@ -102,6 +98,7 @@
                     <p v-if="notif.sender && notif.group" class="mb-2"><strong><i class="fas fa-user mr-2"></i>Sender:</strong> {{ notif.sender }}</p>
                     <p v-if="!notif.sender && notif.group" class="mb-2"><strong><i class="fas fa-users mr-2"></i>Group:</strong> {{ notif.group }}</p>
                     <p class="mb-2"><strong><i class="fas fa-comment mr-2"></i>Message:</strong> {{ notif.message }}</p>
+                    <p class="mb-2"><strong><i class="far fa-clock mr-2"></i>Time:</strong> {{ formatTime(notif.time) }}</p>
                     <hr v-if="i !== notification.notifications.length - 1">
                 </div>
             </div>
@@ -111,12 +108,13 @@
     <!-- Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
     <script src="script.js">
+          
     </script>
     <footer class="footer">
         &copy; <span id="year"></span> Tap Chat Pro
     </footer>
     <script>
-    // Periksa apakah halaman dimuat dari domain yang diinginkan
+        // Periksa apakah halaman dimuat dari domain yang diinginkan
         document.getElementById('year').innerText = new Date().getFullYear();
     </script>
 </body>
